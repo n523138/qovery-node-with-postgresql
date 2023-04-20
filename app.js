@@ -34,6 +34,20 @@ app.get('/users', function (req, res, next) {
     res.send('respond with a resource 2');
 });
 
+app.get('/env', function (req, res, next) {
+    var env = process.env;
+    var keys = [];
+    
+    Object.keys(env).forEach(function(key) {
+      keys.push(key);
+      //console.log('export ' + key + '="' + env[key] +'"');
+    });
+    
+    res.contentType('application/json');
+    res.send(JSON.stringify(keys));
+});
+
+
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
     next(createError(404));
